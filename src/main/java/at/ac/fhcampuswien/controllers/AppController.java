@@ -4,6 +4,7 @@ import at.ac.fhcampuswien.api.NewsApi;
 import at.ac.fhcampuswien.downloader.Downloader;
 import at.ac.fhcampuswien.enums.Country;
 import at.ac.fhcampuswien.enums.Endpoint;
+import at.ac.fhcampuswien.exception.NewsApiException;
 import at.ac.fhcampuswien.models.Article;
 import at.ac.fhcampuswien.models.NewsResponse;
 import java.util.ArrayList;
@@ -46,7 +47,7 @@ public class AppController {
      * get the top headlines from austria via newsapi
      * @return article list
      */
-    public List<Article> getTopHeadlinesAustria() {
+    public List<Article> getTopHeadlinesAustria() throws NewsApiException {
         NewsApi api = new NewsApi("corona", Country.at, Endpoint.TOP_HEADLINES);
         NewsResponse response = api.requestData();
 
@@ -62,7 +63,7 @@ public class AppController {
      * in their title from newsapi
      * @return filtered list
      */
-    public List<Article> getAllNewsBitcoin() {
+    public List<Article> getAllNewsBitcoin() throws NewsApiException {
         NewsApi api = new NewsApi("bitcoin", Endpoint.EVERYTHING);
         NewsResponse response = api.requestData();
 

@@ -3,6 +3,7 @@ package at.ac.fhcampuswien.ui;
 import at.ac.fhcampuswien.controllers.AppController;
 import at.ac.fhcampuswien.downloader.ParallelDownloader;
 import at.ac.fhcampuswien.downloader.SequentialDownloader;
+import at.ac.fhcampuswien.exception.NewsApiException;
 import at.ac.fhcampuswien.models.Article;
 
 import java.util.List;
@@ -13,7 +14,7 @@ public class Menu {
     private static final String EXIT_MESSAGE = "Bye bye!";
     private AppController controller;
 
-    public void start(){
+    public void start() throws NewsApiException {
         String input;
         controller = new AppController();
 
@@ -25,7 +26,7 @@ public class Menu {
 
     }
 
-    private void handleInput(String input){
+    private void handleInput(String input) throws NewsApiException {
         switch (input) {
             case "a" -> getTopHeadlinesAustria(controller);
             case "b" -> getAllNewsBitcoin(controller);
@@ -51,7 +52,7 @@ public class Menu {
         System.out.println("Number of articles: " + controller.getArticleCount());
     }
 
-    private void getTopHeadlinesAustria(AppController controller) {
+    private void getTopHeadlinesAustria(AppController controller) throws NewsApiException {
         List<Article> articleList = controller.getTopHeadlinesAustria();
 
         for( Article a : articleList) {
@@ -59,7 +60,7 @@ public class Menu {
         }
     }
 
-    private void getAllNewsBitcoin(AppController controller) {
+    private void getAllNewsBitcoin(AppController controller) throws NewsApiException {
         System.out.println(controller.getAllNewsBitcoin());
     }
 

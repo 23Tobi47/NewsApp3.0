@@ -161,7 +161,7 @@ public class NewsApi {
         return sb.toString();
     }
 
-    public NewsResponse requestData() {
+    public NewsResponse requestData() throws NewsApiException {
         String url = buildUrl();
 
         Request request = new Request.Builder()

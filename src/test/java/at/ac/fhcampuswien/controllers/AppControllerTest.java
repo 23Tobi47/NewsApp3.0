@@ -1,5 +1,6 @@
 package at.ac.fhcampuswien.controllers;
 
+import at.ac.fhcampuswien.exception.NewsApiException;
 import at.ac.fhcampuswien.models.Article;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -25,7 +26,7 @@ public class AppControllerTest {
 
     @Test
     @DisplayName("getAllNewsBitcoin Test 1")
-    public void getAllNewsBitcoin_scenario1(){
+    public void getAllNewsBitcoin_scenario1() throws NewsApiException {
         List<Article> list = generateMockList();
         controller.setArticles(list);
         List<Article> bitcoinArticles = controller.getAllNewsBitcoin();
@@ -34,7 +35,7 @@ public class AppControllerTest {
 
     @Test
     @DisplayName("getAllNewsBitcoin Test 2")
-    public void getAllNewsBitcoin_scenario2(){
+    public void getAllNewsBitcoin_scenario2() throws NewsApiException {
         List<Article> list = generateMockList();
         controller.setArticles(list);
         List<Article> bitcoinArticles = controller.getAllNewsBitcoin();
@@ -43,7 +44,7 @@ public class AppControllerTest {
 
     @Test
     @DisplayName("getAllNewsBitcoin Test 3 - list is null")
-    public void getAllNewsBitcoin_scenario3(){
+    public void getAllNewsBitcoin_scenario3() throws NewsApiException {
         controller.setArticles(null);
         List<Article> bitcoinArticles = controller.getAllNewsBitcoin();
         assertNotNull(bitcoinArticles);
@@ -84,7 +85,7 @@ public class AppControllerTest {
 
     @Test
     @DisplayName("getTopHeadlinesAustria Test 1")
-    public void getTopHeadlinesAustria_scenario1(){
+    public void getTopHeadlinesAustria_scenario1() throws NewsApiException {
         List<Article> list = generateMockList();
         controller.setArticles(list);
         assertEquals(list, controller.getTopHeadlinesAustria());
@@ -92,7 +93,7 @@ public class AppControllerTest {
 
     @Test
     @DisplayName("getTopHeadlinesAustria Test 2")
-    public void getTopHeadlinesAustria_scenario2(){
+    public void getTopHeadlinesAustria_scenario2() throws NewsApiException {
         controller.setArticles(null);
         assertNotNull(controller.getTopHeadlinesAustria());
     }
