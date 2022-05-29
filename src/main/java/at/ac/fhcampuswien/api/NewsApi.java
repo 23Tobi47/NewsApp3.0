@@ -4,12 +4,14 @@ import at.ac.fhcampuswien.enums.*;
 import at.ac.fhcampuswien.exception.NewsApiException;
 import at.ac.fhcampuswien.models.NewsResponse;
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 import io.github.cdimascio.dotenv.Dotenv;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
 import java.io.IOException;
+import java.net.UnknownHostException;
 import java.util.Objects;
 
 public class NewsApi {
@@ -177,6 +179,16 @@ public class NewsApi {
                 System.err.println(this.getClass() + ": http status not ok");
                 return null;
             }
+        } catch (UnknownHostException ExceptionInternetConnection) {
+            client.dispatcher().executorService().shutdown();
+            System.out.println("Check your internet connection!");
+            return null;
+            // https://www.tabnine.com/code/java/methods/okhttp3.Dispatcher/executorService (29.05.2022)
+            // When user has no internet connection
+        } catch (JsonSyntaxException e){
+            System.out.println("False Json Syntax");
+            return null;
+            // https://stackoverflow.com/questions/9455577/how-to-properly-handle-important-unchecked-exceptions
         } catch (IOException e) {
             System.out.println(e.getMessage());
             return null;

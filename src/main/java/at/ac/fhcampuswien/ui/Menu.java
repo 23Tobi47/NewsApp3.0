@@ -58,10 +58,21 @@ public class Menu {
         for( Article a : articleList) {
             System.out.println(a);
         }
+
+        try {
+            System.out.println(controller.getTopHeadlinesAustria());
+        } catch (NullPointerException e){
+            System.out.println("There are no top headlines in Austria!");
+        }
     }
 
     private void getAllNewsBitcoin(AppController controller) throws NewsApiException {
-        System.out.println(controller.getAllNewsBitcoin());
+
+        try {
+            System.out.println(controller.getAllNewsBitcoin());
+        } catch (NullPointerException e){
+            System.out.println("There are no news about bitcoin!");
+        }
     }
 
     public static void printExitMessage(){
