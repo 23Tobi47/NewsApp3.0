@@ -1,6 +1,7 @@
 package at.ac.fhcampuswien.api;
 
 import at.ac.fhcampuswien.enums.*;
+import at.ac.fhcampuswien.exception.NewsApiException;
 import at.ac.fhcampuswien.models.NewsResponse;
 import com.google.gson.Gson;
 import io.github.cdimascio.dotenv.Dotenv;
@@ -112,9 +113,16 @@ public class NewsApi {
         this.page = page;
     }
 
-    private String buildUrl(){
-        String baseurl = String.format(URL, getEndpoint().getValue(), getQ(), API_KEY);
+    private String buildUrl() throws NewsApiException {
 
+        if (URL.equals("")) throw new NewsApiException ("Please provide a valid URL!");
+        if (getEndpoint().getValue().equals("")) throw new NewsApiException ("Please provide an Endpoint!");
+        if (getQ().equals("")) throw new NewsApiException ("Please provide a query!");
+        if (API_KEY.equals("")) throw new NewsApiException ("Please provide an ApiKey, read the PDF on how to do it!");
+
+
+
+        String baseurl = String.format(URL, getEndpoint().getValue(), getQ(), API_KEY);
         StringBuilder sb = new StringBuilder(baseurl);
 
         if(getFrom() != null){
