@@ -11,7 +11,7 @@ public class NewsResponse {
         return status;
     }
 
-    public int getTotalResults() {
+    public int getTotalResults(int size) {
         return totalResults;
     }
 

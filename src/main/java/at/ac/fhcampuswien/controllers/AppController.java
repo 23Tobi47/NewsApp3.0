@@ -7,6 +7,7 @@ import at.ac.fhcampuswien.enums.Endpoint;
 import at.ac.fhcampuswien.exception.NewsApiException;
 import at.ac.fhcampuswien.models.Article;
 import at.ac.fhcampuswien.models.NewsResponse;
+import at.ac.fhcampuswien.models.Source;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -15,6 +16,8 @@ import java.util.stream.Collectors;
 
 public class AppController {
     private List<Article> articles;
+    NewsResponse newsResponse = new NewsResponse();
+    Source source = new Source();
 
     public AppController() {}
 
@@ -109,7 +112,7 @@ public class AppController {
     }
 
     // Due to malfunctions, NYT isn't working, instead we are taking CNN
-    public String printAmountOfNYTArticles(){
+    public String printAmountOfCNNArticles(){
         if (!articles.isEmpty()) {
             return "" + articles.stream().filter(article -> article.getSource().getName().equals("CNN"))
                     .count();
@@ -126,6 +129,41 @@ public class AppController {
                     .get().getAuthor();
         } else {
             return "No Articles in the List!";
+        }
+    }
+
+    public List<Article> getTitlesLessThan15(){
+        List<Article> filteredArticles = new ArrayList<>();
+        if (articles == null) {
+            return null;
+        }else {
+            articles.stream()
+                    .filter(article -> article.getTitle().length() < 15)
+                    .forEach(filteredArticles::add);
+            if(filteredArticles.isEmpty()) {
+                return null;
+            }else {
+                return filteredArticles;
+            }
+        }
+    }
+
+    public List<Article> longestDescription(){
+        for(int i = 0; i < articles.size();i++){
+            if(articles.get(i).getDescription() == null){
+                articles.get(i).setDescription("");
+            }
+        }
+        if(!articles.isEmpty()){
+            setArticles(articles.stream()
+//                    .filter(article -> article.getDescription() != null)   //if we want to remove all articles with no description
+                    .sorted(Comparator.comparingInt((Article article) -> article.getDescription().length())
+                            .thenComparing(Article::getDescription))
+                    .collect(Collectors.toList()));
+            return articles;
+
+        }else{
+            return new ArrayList<>();
         }
     }
 }

@@ -36,6 +36,8 @@ public class Menu {
             case "c" -> printSourceWithMostArticles(controller);
             case "d" -> printLongestAuthorName(controller);
             case "e" -> printAmountOfNYTArticles(controller);
+            case "f" -> printHeadlinesUnder15(controller);
+            case "g" -> longestDescription(controller);
 
 
             default -> printInvalidInputMessage();
@@ -62,11 +64,19 @@ public class Menu {
     }
 
     private void printAmountOfNYTArticles(AppController controller){
-        System.out.println("Number of articles: " + controller.printAmountOfNYTArticles());
+        System.out.println("Number of articles: " + controller.printAmountOfCNNArticles());
     }
 
     public void printLongestAuthorName (AppController controller){
         System.out.println("Author with the longest name: "+ controller.printLongestAuthorName());
+    }
+
+    public void printHeadlinesUnder15(AppController controller){
+        System.out.println("Headline with less than 15 letters: " + controller.getTitlesLessThan15());
+    }
+
+    public void longestDescription(AppController controller){
+        System.out.println(controller.longestDescription());
     }
 
     private void getTopHeadlinesAustria(AppController controller) throws NewsApiException {
@@ -112,7 +122,7 @@ public class Menu {
                 q: Quit program
                 c: Get provider with most articles
                 d: Get longest author name
-                e: Count articles from NY Times
+                e: Count articles from CNN
                 f: Get articles with short title
                 g: Sort articles by content length
                 h: Download URLs
