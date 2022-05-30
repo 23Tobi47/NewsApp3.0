@@ -8,6 +8,7 @@ import at.ac.fhcampuswien.exception.NewsApiException;
 import at.ac.fhcampuswien.models.Article;
 import at.ac.fhcampuswien.models.NewsResponse;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -114,6 +115,17 @@ public class AppController {
                     .count();
         } else {
             return "There are no Articles in the list";
+        }
+    }
+
+    public String printLongestAuthorName(){
+        if(!articles.isEmpty()){
+            return articles.stream()
+                    .filter(article -> article.getAuthor()!=null)
+                    .max(Comparator.comparing(article -> article.getAuthor().length()))
+                    .get().getAuthor();
+        } else {
+            return "No Articles in the List!";
         }
     }
 }

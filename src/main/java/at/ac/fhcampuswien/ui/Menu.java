@@ -34,6 +34,7 @@ public class Menu {
             case "q" -> printExitMessage();
             case "h" -> downloadURLs();
             case "c" -> printSourceWithMostArticles(controller);
+            case "d" -> printLongestAuthorName(controller);
             case "e" -> printAmountOfNYTArticles(controller);
 
 
@@ -62,6 +63,10 @@ public class Menu {
 
     private void printAmountOfNYTArticles(AppController controller){
         System.out.println("Number of articles: " + controller.printAmountOfNYTArticles());
+    }
+
+    public void printLongestAuthorName (AppController controller){
+        System.out.println("Author with the longest name: "+ controller.printLongestAuthorName());
     }
 
     private void getTopHeadlinesAustria(AppController controller) throws NewsApiException {

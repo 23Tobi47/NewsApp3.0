@@ -47,8 +47,13 @@ public class Article {
         return title;
     }
 
+    public void setDescription(String description){
+        this.description = description;
+    }
+
     @Override
     public String toString() {
-        return "Title: " + getTitle() + "\n" + "Author: " + getAuthor();
+        return "Title: " + getTitle() + "\n" + "Author: " + getAuthor()+ "\n"+"Description: "+getDescription();
     }
+
 }
