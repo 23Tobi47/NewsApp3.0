@@ -93,7 +93,7 @@ public class AppController {
     }
 
 
-    public String printMostSource() {
+    public String printSourceWithMostArticles() {
         if (!articles.isEmpty()){
             return articles.stream()
                     .collect(Collectors.groupingBy(article -> article.getSource().getName(), Collectors.counting()))
