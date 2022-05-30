@@ -33,6 +33,9 @@ public class Menu {
             case "y" -> getArticleCount(controller);
             case "q" -> printExitMessage();
             case "h" -> downloadURLs();
+            case "c" -> printMostSource(controller);
+            case "e" -> printAmountOfNYTArticles(controller);
+
             default -> printInvalidInputMessage();
         }
     }
@@ -50,6 +53,14 @@ public class Menu {
 
     private void getArticleCount(AppController controller) {
         System.out.println("Number of articles: " + controller.getArticleCount());
+    }
+
+    private void printMostSource (AppController controller){
+        //controller.setArticles( "Name of the most source used: " + controller.printMostSource());
+    }
+
+    private void printAmountOfNYTArticles(AppController controller){
+        System.out.println("Number of articles: " + controller.printAmountOfNYTArticles());
     }
 
     private void getTopHeadlinesAustria(AppController controller) throws NewsApiException {

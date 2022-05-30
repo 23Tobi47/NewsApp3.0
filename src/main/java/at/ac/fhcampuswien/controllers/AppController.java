@@ -9,6 +9,8 @@ import at.ac.fhcampuswien.models.Article;
 import at.ac.fhcampuswien.models.NewsResponse;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class AppController {
     private List<Article> articles;
@@ -48,7 +50,7 @@ public class AppController {
      * @return article list
      */
     public List<Article> getTopHeadlinesAustria() throws NewsApiException {
-        NewsApi api = new NewsApi("corona", Country.at, Endpoint.TOP_HEADLINES);
+        NewsApi api = new NewsApi("shooting", Country.us, Endpoint.TOP_HEADLINES);
         NewsResponse response = api.requestData();
 
         if(response != null){
@@ -88,5 +90,30 @@ public class AppController {
             }
         }
         return filtered;
+    }
+
+
+    public String printMostSource() {
+        if (!articles.isEmpty()){
+            return articles.stream()
+                    .collect(Collectors.groupingBy(article -> article.getSource().getName(), Collectors.counting()))
+                    .entrySet()
+                    .stream()
+                    .max(Map.Entry.comparingByValue())
+                    .get()
+                    .getKey();
+        } else {
+            return "There are no Articles in the list";
+        }
+    }
+
+    // Due to malfunctions, NYT isn't working, instead we are taking CNN
+    public String printAmountOfNYTArticles(){
+        if (!articles.isEmpty()) {
+            return "" + articles.stream().filter(article -> article.getSource().getName().equals("CNN"))
+                    .count();
+        } else {
+            return "There are no Articles in the list";
+        }
     }
 }
