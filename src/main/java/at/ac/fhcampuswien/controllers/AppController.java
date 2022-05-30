@@ -132,7 +132,7 @@ public class AppController {
         }
     }
 
-    public List<Article> getTitlesLessThan15(){
+    public List<Article> printHeadlinesUnder15(){
         List<Article> filteredArticles = new ArrayList<>();
         if (articles == null) {
             return null;
@@ -148,7 +148,7 @@ public class AppController {
         }
     }
 
-    public List<Article> longestDescription(){
+    public List<Article> printLongestDescription(){
         for(int i = 0; i < articles.size();i++){
             if(articles.get(i).getDescription() == null){
                 articles.get(i).setDescription("");

@@ -35,9 +35,9 @@ public class Menu {
             case "h" -> downloadURLs();
             case "c" -> printSourceWithMostArticles(controller);
             case "d" -> printLongestAuthorName(controller);
-            case "e" -> printAmountOfNYTArticles(controller);
+            case "e" -> printAmountOfCNNArticles(controller);
             case "f" -> printHeadlinesUnder15(controller);
-            case "g" -> longestDescription(controller);
+            case "g" -> printLongestDescription(controller);
 
 
             default -> printInvalidInputMessage();
@@ -60,23 +60,43 @@ public class Menu {
     }
 
     private void printSourceWithMostArticles (AppController controller){
-        System.out.println( "Name of the most source used: " + controller.printSourceWithMostArticles());
+        try {
+            System.out.println("Name of most used source: " + controller.printSourceWithMostArticles());
+        } catch (NullPointerException exception) {
+            System.out.println("Unable to find a source with more Articles than others!");
+        }
     }
 
-    private void printAmountOfNYTArticles(AppController controller){
-        System.out.println("Number of articles: " + controller.printAmountOfCNNArticles());
+    private void printAmountOfCNNArticles(AppController controller){
+        try {
+            System.out.println("Number of articles: " + controller.printAmountOfCNNArticles());
+        } catch (NullPointerException exception) {
+            System.out.println("No Articles of CNN found!");
+        }
     }
 
     public void printLongestAuthorName (AppController controller){
-        System.out.println("Author with the longest name: "+ controller.printLongestAuthorName());
+        try {
+            System.out.println("Author with longest name: " + controller.printLongestAuthorName());
+        } catch (NullPointerException exception) {
+            System.out.println("Can not print the longest author name!");
+        }
     }
 
     public void printHeadlinesUnder15(AppController controller){
-        System.out.println("Headline with less than 15 letters: " + controller.getTitlesLessThan15());
+        try {
+            System.out.println("Headline with less than 15 characters: " + controller.printHeadlinesUnder15());
+        } catch (NullPointerException exception) {
+            System.out.println("No Title with less than 15 characters found!");
+        }
     }
 
-    public void longestDescription(AppController controller){
-        System.out.println(controller.longestDescription());
+    public void printLongestDescription(AppController controller){
+        try {
+            System.out.println(controller.printLongestDescription());
+        } catch (NullPointerException exception) {
+            System.out.println("No Articles with descriptions found!");
+        }
     }
 
     private void getTopHeadlinesAustria(AppController controller) throws NewsApiException {
